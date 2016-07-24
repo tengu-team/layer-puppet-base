@@ -8,9 +8,9 @@ from charms.layer.puppet import Puppet
 
 
 options = layer.options('puppet-base')
-puppet_service = options.get('puppet-pkg')
+puppet_service = options.get('puppet-srvc')
 
-PUPPET_SERVICE_INSTALLED = "%s.installed" % puppet_service
+PUPPET_SERVICE_INSTALLED = "puppet.%s.installed" % puppet_service
 
 
 @when_not(PUPPET_SERVICE_INSTALLED)

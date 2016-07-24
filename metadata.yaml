@@ -6,12 +6,9 @@ description: |
 tags:
   - puppet
   - devops
-peers:
-  puppet:
-    interface: puppet
 provides:
   master:
-    interface: puppet-agent
+    interface: puppet-master
   agent:
     interface: puppet-agent
   db:

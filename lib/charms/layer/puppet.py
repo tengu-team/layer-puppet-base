@@ -18,7 +18,7 @@ config = hookenv.config()
 class Puppet:
     def __init__(self):
         self.options = layer.options('puppet-base')
-        self.puppet_pkg = self.options.get('puppet-pkg')
+        self.puppet_pkg = self.options.get('puppet-srvc')
         self.puppet_base_url = 'http://apt.puppetlabs.com'
         self.puppet_gpg_key = config['puppet-gpg-key']
         self.puppet_exe = '/opt/puppetlabs/bin/puppet'
