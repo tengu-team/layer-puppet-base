@@ -50,8 +50,8 @@ def configure_pgsql(pgsql):
 **puppet.db.available** - This state is emitted once the desired puppet packages have been installed.
 **puppet.ca.available** - This state is emitted once the desired puppet packages have been installed.
 
-### Contact
-* [Puppet](https://puppet.com/)
+### More info on Puppet
+* [Puppetlabs](https://puppet.com/)
 
 ### Copyright
 
