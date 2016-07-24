@@ -1,0 +1,20 @@
+name: puppet-base
+summary: Base layer for puppet4
+maintainer: OpenStack Charmers <jamesbeedy@gmail.com>
+description: |
+ This base layer proviedes the means to install puppet keys, repo sources, and packages.
+tags:
+  - puppet
+  - devops
+peers:
+  puppet:
+    interface: puppet
+provides:
+  master:
+    interface: puppet-agent
+  agent:
+    interface: puppet-agent
+  db:
+    interface: puppet-db
+  ca:
+    interface: puppet-ca

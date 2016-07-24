@@ -1,0 +1,10 @@
+repo: https://github.com/jamesbeedy/layer-puppet-agent.git
+includes:
+  - 'layer:basic'
+  - 'layer:apt'
+defines:
+  puppet-pkg:
+    type: string
+    default: ''
+    description: |
+      Puppet pkg aptions are `master`, `agent`, `db`, `ca`.
