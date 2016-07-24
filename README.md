@@ -31,7 +31,8 @@ PUPPET_DB_CONF = '/etc/puppetlabs/puppetdb/conf.d/puppet.conf'
 @when('puppet.db.available', 'postgresql.available')
 @when_not('puppet.db.configured')
 def configure_pgsql(pgsql):
-    '''Configure postgres <--> puppetdb
+
+    '''Write out puppetdb config
     '''
     if os.path.exists(PUPPET_DB_CONF):
         os.remove(PUPPET_DB_CONF)
@@ -45,10 +46,10 @@ def configure_pgsql(pgsql):
 ```
 
 ### States
-**puppet.master.available** - This state is emitted once the desired puppet packages have been installed.
-**puppet.agent.available** - This state is emitted once the desired puppet packages have been installed.
-**puppet.db.available** - This state is emitted once the desired puppet packages have been installed.
-**puppet.ca.available** - This state is emitted once the desired puppet packages have been installed.
+**puppet.master.available** - This state is emitted once the `puppetserver` package has been installed.
+**puppet.agent.available** - This state is emitted once the `puppet-agent` package has been installed.
+**puppet.db.available** - This state is emitted once the `puppetdb` package has been installed.
+**puppet.ca.available** - This state is emitted once the `puppetserver` package has been installed.
 
 ### More info on Puppet
 * [Puppetlabs](https://puppet.com/)
