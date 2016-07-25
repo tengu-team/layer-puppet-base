@@ -15,11 +15,11 @@ PUPPET_SERVICE_INSTALLED = "puppet.%s.installed" % puppet_service
 
 @when_not(PUPPET_SERVICE_INSTALLED)
 def install_puppet_agent():
+
     '''Install puppet pkg
     '''
-    p = Puppet()
-    # Download and install trusty puppet deb
     hookenv.status_set('maintenance',
                        'Installing puppet %s' % puppet_service)
+    p = Puppet()
     p.install_puppet_apt_pkg()
     set_state(PUPPET_SERVICE_INSTALLED)
