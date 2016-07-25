@@ -4,7 +4,7 @@ from charms.reactive import set_state
 
 from charmhelpers.core import hookenv
 
-from charms.layer.puppet import Puppet
+from charms.layer.puppet_base import Puppet
 
 
 options = layer.options('puppet-base')
