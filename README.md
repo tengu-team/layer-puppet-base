@@ -1,9 +1,11 @@
 # layer-puppet-base
 
-This layer facilitates the installation of puppet pkgs.
+This layer facilitates the installation of Puppet 4 services and modules on Ubuntu 14.04 and 16.04. It also provides handy functions for running Puppet scripts in standalone mode and parsing `facter` output.
 
 ## Usage
-To use this layer, include `puppet-base`, and add an options for puppet-srvc in your layer's layer.yaml
+
+To use this layer, include `puppet-base`, and add an `options` for puppet-srvc in your layer's `layer.yaml`.
+
 ```yaml
 # layer.yaml
 ---
@@ -17,8 +19,16 @@ options:
 ...
 ```
 
+`puppet-srvc` is the Puppet service to install. Possible values:
+
+- `standalone` installs the `puppet-agent` package without starting the service,
+- `master` and `ca` install and start the `puppetserver` service,
+- `agent` installs and starts the `puppet-agent` service,
+- `db` installs and starts the `puppetdb` service.
 
 Then you can react when the configured puppet services become available in consuming layers.
+
+**Puppet DB example**
 
 ```python
 import os
@@ -45,18 +55,41 @@ def configure_pgsql(pgsql):
     set_state('puppet.db.configured')
 ```
 
+**Puppet Standalone example**
+
+```python
+@when('puppet.standalone.installed')
+def install_something_using_puppet():
+    puppet = Puppet()
+    facter = puppet.facter('networking')
+    ipaddress = facter['ipaddress']
+    templating.render(
+        source='init.pp',
+        target='/opt/my-app/init.pp',
+        context={
+          'address': ipaddress,
+        }
+    )
+    puppet.apply('/opt/my-app/init.pp')
+```
+
+For an example of how to use this layer in standalone mode, see the [openvpn layer](https://github.com/IBCNServices/layer-openvpn).
+
 ### States
-**puppet.master.available** - This state is emitted once the `puppetserver` package has been installed.
-**puppet.agent.available** - This state is emitted once the `puppet-agent` package has been installed.
-**puppet.db.available** - This state is emitted once the `puppetdb` package has been installed.
-**puppet.ca.available** - This state is emitted once the `puppetserver` package has been installed.
+
+- **puppet.master.installed** - This state is emitted once the `puppetserver` package has been installed.
+- **puppet.agent.installed** - This state is emitted once the `puppet-agent` package has been installed.
+- **puppet.standalone.installed** - This state is emitted once the `puppet-agent` package has been installed in standalone mode.
+- **puppet.db.installed** - This state is emitted once the `puppetdb` package has been installed.
+- **puppet.ca.installed** - This state is emitted once the `puppetserver` package has been installed.
 
 ### More info on Puppet
 * [Puppetlabs](https://puppet.com/)
 
 ### Copyright
 
-Copyright &copy; 2016 James Beedy <jamesbeedy@gmail.com>
+- Copyright &copy; 2016 James Beedy <jamesbeedy@gmail.com>
+- Copyright &copy; 2016 Merlijn Sebrechts <merlijn.sebrechts@gmail.com>
 
 ### License
 

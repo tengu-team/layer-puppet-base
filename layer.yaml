@@ -7,4 +7,4 @@ defines:
     type: string
     default: ''
     description: |
-      Puppet pkg aptions are `master`, `agent`, `db`, `ca`.
+      Puppet pkg options are `master`, `agent`, `standalone`, `db`, `ca`.
